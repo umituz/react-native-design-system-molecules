@@ -105,7 +105,7 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
             testID={`${testID}-back-button`}
           >
-            <AtomicIcon name="arrow-back" color="primary" />
+            <AtomicIcon name="ArrowLeft" color="primary" />
           </TouchableOpacity>
         )}
       </View>
