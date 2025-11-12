@@ -6,7 +6,7 @@
 
 import { ViewStyle } from 'react-native';
 import { ConfirmationModalVariant, ConfirmationModalVariantConfig } from '../types';
-import type { DesignTokens } from '@umituz/react-native-theme';
+import type { DesignTokens } from '@umituz/react-native-design-system-theme';
 
 /**
  * Get variant configuration (icon and color only)

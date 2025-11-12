@@ -15,7 +15,7 @@
 
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { useAppDesignTokens } from '@umituz/react-native-theme';
+import { useAppDesignTokens } from '@umituz/react-native-design-system-theme';
 import { AtomicCard, AtomicText } from '@umituz/react-native-design-system-atoms';
 
 interface SectionCardProps {

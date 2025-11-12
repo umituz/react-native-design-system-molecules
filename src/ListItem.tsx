@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { useAppDesignTokens } from '@umituz/react-native-theme';
+import { useAppDesignTokens } from '@umituz/react-native-design-system-theme';
 import { AtomicText, AtomicIcon } from '@umituz/react-native-design-system-atoms';
 import { ListItemProps } from './listitem/types';
 import { getListItemStyles } from './listitem/styles/listItemStyles';

@@ -7,7 +7,7 @@ Molecule design components for React Native - Composite UI components built from
 - 🎨 **Material Design 3** - Modern, accessible UI components
 - ⚛️ **Pure React Native** - No external UI library dependencies
 - 🧬 **Atomic Design** - Composite components (molecules) built from atoms
-- 🌓 **Theme Support** - Built-in light/dark mode via `@umituz/react-native-theme`
+- 🌓 **Theme Support** - Built-in light/dark mode via `@umituz/react-native-design-system-theme`
 - 📱 **Responsive** - Adaptive layouts for phones and tablets
 - ♿ **Accessible** - WCAG AA compliant components
 - 📦 **Zero Config** - Works out of the box
@@ -22,7 +22,7 @@ npm install @umituz/react-native-design-system-molecules
 ### Peer Dependencies
 
 ```bash
-npm install @umituz/react-native-design-system-atoms @umituz/react-native-theme
+npm install @umituz/react-native-design-system-atoms @umituz/react-native-design-system-theme
 npm install react@18.3.1 react-native@0.76.3
 ```
 
@@ -79,10 +79,10 @@ const MyComponent = () => {
 
 ## 🌓 Theme Integration
 
-This package requires `@umituz/react-native-theme` and `@umituz/react-native-design-system-atoms`:
+This package requires `@umituz/react-native-design-system-theme` and `@umituz/react-native-design-system-atoms`:
 
 ```typescript
-import { ThemeProvider } from '@umituz/react-native-theme';
+import { ThemeProvider } from '@umituz/react-native-design-system-theme';
 import { FormField } from '@umituz/react-native-design-system-molecules';
 
 const App = () => (

@@ -1,5 +1,5 @@
 import { ViewStyle } from 'react-native';
-import { useAppDesignTokens } from '@umituz/react-native-theme';
+import { useAppDesignTokens } from '@umituz/react-native-design-system-theme';
 
 type DesignTokens = ReturnType<typeof useAppDesignTokens>;
 
