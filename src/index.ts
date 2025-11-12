@@ -21,25 +21,25 @@ export { EmptyState } from './EmptyState';
 export { SectionHeader } from './SectionHeader';
 export { SectionContainer } from './SectionContainer';
 export { GridContainer } from './GridContainer';
-export { AtomicConfirmationModal, useConfirmationModal } from './AtomicConfirmationModal';
+export { ConfirmationModal, useConfirmationModal } from './ConfirmationModal';
 
 // Type exports
 export type { FormFieldProps } from './FormField';
 export type { ListItemProps } from './ListItem';
 export type { SearchBarProps } from './SearchBar';
 export type { ScreenHeaderProps } from './ScreenHeader';
-export type { AtomicConfirmationModalProps, ConfirmationModalVariant } from './AtomicConfirmationModal';
+export type { ConfirmationModalProps, ConfirmationModalVariant } from './ConfirmationModal';
 
 // Union type for all molecule props (used for type narrowing)
 import type { FormFieldProps } from './FormField';
 import type { ListItemProps } from './ListItem';
 import type { SearchBarProps } from './SearchBar';
 import type { ScreenHeaderProps } from './ScreenHeader';
-import type { AtomicConfirmationModalProps } from './AtomicConfirmationModal';
+import type { ConfirmationModalProps } from './ConfirmationModal';
 
 export type MoleculeComponentProps =
   | FormFieldProps
   | ListItemProps
   | SearchBarProps
   | ScreenHeaderProps
-  | AtomicConfirmationModalProps;
+  | ConfirmationModalProps;

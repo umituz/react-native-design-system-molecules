@@ -1,5 +1,5 @@
 /**
- * AtomicConfirmationModal Style Utilities
+ * ConfirmationModal Style Utilities
  *
  * Styling functions for confirmation modal component
  */

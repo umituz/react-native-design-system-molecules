@@ -1,5 +1,5 @@
 /**
- * AtomicConfirmationModal - Universal Confirmation Dialog
+ * ConfirmationModal - Universal Confirmation Dialog
  *
  * A reusable confirmation modal for destructive and important actions.
  * Follows Material Design 3 dialog patterns and accessibility guidelines.
@@ -14,7 +14,7 @@
  * @example
  * ```tsx
  * // Destructive confirmation (delete)
- * <AtomicConfirmationModal
+ * <ConfirmationModal
  *   visible={showDeleteModal}
  *   variant="destructive"
  *   title="Delete Item?"
@@ -26,7 +26,7 @@
  * />
  *
  * // Generic confirmation
- * <AtomicConfirmationModal
+ * <ConfirmationModal
  *   visible={showConfirmModal}
  *   variant="default"
  *   title="Confirm Action"
@@ -42,7 +42,7 @@ import { View, Modal, TouchableOpacity } from 'react-native';
 import { useAppDesignTokens } from '@umituz/react-native-theme';
 import { AtomicText, AtomicButton, AtomicIcon } from '@umituz/react-native-design-system-atoms';
 import {
-  AtomicConfirmationModalProps,
+  ConfirmationModalProps,
   ConfirmationModalVariant,
 } from './confirmation-modal/types';
 import {
@@ -57,10 +57,10 @@ import {
   getButtonStyle,
 } from './confirmation-modal/styles/confirmationModalStyles';
 
-export type { AtomicConfirmationModalProps };
+export type { ConfirmationModalProps };
 export type { ConfirmationModalVariant };
 
-export const AtomicConfirmationModal: React.FC<AtomicConfirmationModalProps> = ({
+export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   visible,
   title,
   message,
@@ -200,7 +200,7 @@ export const AtomicConfirmationModal: React.FC<AtomicConfirmationModalProps> = (
  * });
  *
  * // In JSX
- * <AtomicConfirmationModal {...confirmationProps} />
+ * <ConfirmationModal {...confirmationProps} />
  * <Button onPress={showConfirmation}>Delete</Button>
  * ```
  */
@@ -222,7 +222,7 @@ export const useConfirmationModal = (config: {
     hideConfirmation();
   };
 
-  const confirmationProps: AtomicConfirmationModalProps = {
+  const confirmationProps: ConfirmationModalProps = {
     visible,
     title: config.title,
     message: config.message,

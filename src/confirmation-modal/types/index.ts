@@ -1,5 +1,5 @@
 /**
- * AtomicConfirmationModal Type Definitions
+ * ConfirmationModal Type Definitions
  *
  * Type-safe interfaces for confirmation modal component
  */
@@ -18,9 +18,9 @@ export type ConfirmationModalVariant =
   | 'success';     // Success confirmation (green/success)
 
 /**
- * Props for AtomicConfirmationModal component
+ * Props for ConfirmationModal component
  */
-export interface AtomicConfirmationModalProps {
+export interface ConfirmationModalProps {
   /**
    * Whether the modal is visible
    */
