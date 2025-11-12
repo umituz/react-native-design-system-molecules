@@ -5,7 +5,7 @@
  */
 
 import { StyleProp, ViewStyle } from 'react-native';
-import type { AtomicIconColor } from '@umituz/react-native-design-system-atoms';
+import type { IconColor } from '@umituz/react-native-design-system-atoms';
 
 /**
  * Confirmation modal variant
@@ -101,5 +101,5 @@ export interface ConfirmationModalProps {
 export interface ConfirmationModalVariantConfig {
   icon: string; // MaterialIcons name
   confirmText: string;
-  iconColor: AtomicIconColor;
+  iconColor: IconColor;
 }
