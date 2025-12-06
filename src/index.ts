@@ -17,7 +17,6 @@ export { SearchBar } from './SearchBar';
 export { SectionCard } from './SectionCard';
 export { IconContainer } from './IconContainer';
 export { ScreenHeader } from './ScreenHeader';
-export { EmptyState } from './EmptyState';
 export { SectionHeader } from './SectionHeader';
 export { SectionContainer } from './SectionContainer';
 export { GridContainer } from './GridContainer';
