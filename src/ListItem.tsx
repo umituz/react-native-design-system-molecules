@@ -8,11 +8,11 @@ import { getListItemStyles } from './listitem/styles/listItemStyles';
 export type { ListItemProps };
 
 export const ListItem: React.FC<ListItemProps> = ({
-  title, subtitle, leftIcon, rightIcon = 'forward', onPress, disabled = false, style,
+  title, subtitle, leftIcon, rightIcon, onPress, disabled = false, style,
 }) => {
   const tokens = useAppDesignTokens();
   const listItemStyles = getListItemStyles(tokens);
-  const Component: React.ComponentType<any> = onPress ? TouchableOpacity : View;
+  const Component = onPress ? TouchableOpacity : View;
 
   return (
     <Component style={[listItemStyles.container, disabled ? listItemStyles.disabled : undefined, style]} onPress={onPress} disabled={disabled} activeOpacity={0.7}>

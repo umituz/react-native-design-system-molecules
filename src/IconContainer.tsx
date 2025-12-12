@@ -17,13 +17,11 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useAppDesignTokens } from '@umituz/react-native-design-system-theme';
-import { LinearGradient } from 'expo-linear-gradient';
 
 interface IconContainerProps {
   icon: React.ReactNode;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   backgroundColor?: string;
-  gradient?: string[];
   withBorder?: boolean;
   borderColor?: string;
   style?: object;
@@ -41,7 +39,6 @@ export const IconContainer: React.FC<IconContainerProps> = ({
   icon,
   size = 'md',
   backgroundColor,
-  gradient,
   withBorder = false,
   borderColor,
   style,
@@ -58,7 +55,7 @@ export const IconContainer: React.FC<IconContainerProps> = ({
       width: containerSize,
       height: containerSize,
       borderRadius,
-      backgroundColor: backgroundColor || (gradient ? undefined : tokens.colors.surfaceVariant),
+      backgroundColor: backgroundColor || tokens.colors.surfaceVariant,
     },
     withBorder && {
       borderWidth: 1,
@@ -66,18 +63,6 @@ export const IconContainer: React.FC<IconContainerProps> = ({
     },
     style,
   ];
-
-  if (gradient) {
-    return (
-      <LinearGradient
-        colors={gradient as unknown as readonly [string, string, ...string[]]}
-        style={containerStyle}
-        testID={testID}
-      >
-        {icon}
-      </LinearGradient>
-    );
-  }
 
   return (
     <View style={containerStyle} testID={testID}>

@@ -12,10 +12,11 @@
     "baseUrl": "./",
 
     /* Emit */
-    "declaration": false,
-    "declarationMap": false,
-    "sourceMap": false,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
     "noEmit": true,
+    "outDir": "./dist",
     "removeComments": false,
 
     /* Interop Constraints */
@@ -24,18 +25,18 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
 
-    /* Type Checking */
-    "strict": false,
+    /* Type Checking - STRICT MODE FOR PRODUCTION */
+    "strict": true,
     "strictNullChecks": true,
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noImplicitReturns": false,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false,
+    "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
     /* Completeness */
@@ -50,17 +51,10 @@
   ],
   "exclude": [
     "node_modules",
+    "dist",
     "**/*.test.ts",
     "**/*.test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx"
   ]
 }
-
-
-
-
-
-
-
-

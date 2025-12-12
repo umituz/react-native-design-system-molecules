@@ -1,22 +1,19 @@
 /**
- * ScreenHeader Component - {{APP_NAME}}
+ * ScreenHeader Component
  *
  * Reusable screen header with consistent back button placement
- * Theme: {{THEME_NAME}} ({{CATEGORY}} category)
  *
  * Features:
- * - Top-left back button (arrow-back icon)
+ * - Top-left back button (configurable icon)
  * - Centered title text
  * - Optional right action button
  * - Consistent spacing and layout
- * - Works with all 100+ generated apps
- *
- * CRITICAL: Back button MUST ALWAYS be top-left (never bottom, never center)
+ * - Theme-aware styling
+ * - Fully configurable for general purpose use
  */
 
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, TouchableOpacity, ViewStyle } from 'react-native';
 import { AtomicIcon, AtomicText } from '@umituz/react-native-design-system-atoms';
 import { useAppDesignTokens } from '@umituz/react-native-design-system-theme';
 
@@ -27,7 +24,7 @@ export interface ScreenHeaderProps {
   /** Optional right action button */
   rightAction?: React.ReactNode;
 
-  /** Custom back button action (default: navigation.goBack()) */
+  /** Custom back button action (required if back button is visible) */
   onBackPress?: () => void;
 
   /** Hide back button (rare cases only) */
@@ -38,6 +35,12 @@ export interface ScreenHeaderProps {
 
   /** Test ID for E2E testing */
   testID?: string;
+
+  /** Custom back button icon name */
+  backIconName?: string;
+
+  /** Custom back button icon color */
+  backIconColor: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'surfaceVariant';
 }
 
 /**
@@ -61,6 +64,67 @@ export interface ScreenHeaderProps {
  *   onBackPress={handleUnsavedChanges}
  * />
  */
+const ScreenHeaderBackButton: React.FC<{
+  hideBackButton?: boolean;
+  onBackPress?: () => void;
+  backIconName?: string;
+  backIconColor?: 'primary' | 'secondary' | 'error' | 'warning' | 'success' | 'surfaceVariant';
+  testID?: string;
+}> = ({ hideBackButton, onBackPress, backIconName, backIconColor, testID }) => {
+  const handleBackPress = React.useCallback(() => {
+    if (onBackPress) {
+      onBackPress();
+    } else {
+      __DEV__ && console.warn('ScreenHeader: onBackPress is required when back button is visible');
+    }
+  }, [onBackPress]);
+
+  if (hideBackButton) return null;
+
+  return (
+    <View style={{ width: 40, alignItems: 'flex-start' }}>
+      <TouchableOpacity
+        onPress={handleBackPress}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        testID={`${testID}-back-button`}
+      >
+            <AtomicIcon name={backIconName || 'ArrowLeft'} color={backIconColor} />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+const ScreenHeaderTitle: React.FC<{
+  title: string;
+  tokens: ReturnType<typeof useAppDesignTokens>;
+  testID?: string;
+}> = ({ title, tokens, testID }) => (
+  <View style={{ flex: 1, alignItems: 'center', paddingHorizontal: tokens.spacing.sm }}>
+    <AtomicText
+      type="headlineMedium"
+      style={[
+        {
+          fontWeight: tokens.typography.bold,
+          textAlign: 'center',
+          color: tokens.colors.textPrimary,
+        }
+      ]}
+      numberOfLines={1}
+      testID={`${testID}-title`}
+    >
+      {title}
+    </AtomicText>
+  </View>
+);
+
+const ScreenHeaderRightAction: React.FC<{
+  rightAction?: React.ReactNode;
+}> = ({ rightAction }) => (
+  <View style={{ width: 40, alignItems: 'flex-start' }}>
+    {rightAction || <View style={{ width: 40 }} />}
+  </View>
+);
+
 export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
   title,
   rightAction,
@@ -68,70 +132,38 @@ export const ScreenHeader: React.FC<ScreenHeaderProps> = ({
   hideBackButton = false,
   style,
   testID = 'screen-header',
+  backIconName = 'ArrowLeft',
+  backIconColor = 'primary',
 }) => {
-  const navigation = useNavigation();
   const tokens = useAppDesignTokens();
 
-  const handleBackPress = () => {
-    if (onBackPress) {
-      onBackPress();
-    } else {
-      navigation.goBack();
-    }
-  };
+  const headerStyle = React.useMemo(() => [
+    {
+      flexDirection: 'row' as const,
+      alignItems: 'center' as const,
+      justifyContent: 'space-between' as const,
+      paddingHorizontal: tokens.spacing.screenPadding,
+      paddingVertical: tokens.spacing.md,
+      borderBottomWidth: 0.5,
+      backgroundColor: tokens.colors.backgroundPrimary,
+      borderBottomColor: tokens.colors.border,
+    },
+    style
+  ], [tokens, style]);
 
   return (
-    <View
-      style={[
-        {
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          paddingHorizontal: tokens.spacing.screenPadding,
-          paddingVertical: tokens.spacing.md,
-          borderBottomWidth: 0.5,
-          backgroundColor: tokens.colors.backgroundPrimary,
-          borderBottomColor: tokens.colors.border,
-        },
-        style
-      ]}
-      testID={testID}
-    >
-      {/* Left: Back Button (ALWAYS top-left when visible) */}
-      <View style={{ width: 40, alignItems: 'flex-start' }}>
-        {!hideBackButton && (
-          <TouchableOpacity
-            onPress={handleBackPress}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            testID={`${testID}-back-button`}
-          >
-            <AtomicIcon name="ArrowLeft" color="primary" />
-          </TouchableOpacity>
-        )}
-      </View>
-
-      {/* Center: Title */}
-      <View style={{ flex: 1, alignItems: 'center', paddingHorizontal: tokens.spacing.sm }}>
-        <AtomicText
-          type="headlineMedium"
-          style={[
-            {
-              fontWeight: tokens.typography.bold,
-              textAlign: 'center',
-              color: tokens.colors.textPrimary,
-            }
-          ]}
-          numberOfLines={1}
-          testID={`${testID}-title`}
-        >
-          {title}
-        </AtomicText>
-      </View>
-
-      {/* Right: Optional Action or Placeholder */}
-      <View style={{ width: 40, alignItems: 'flex-start' }}>
-        {rightAction || <View style={{ width: 40 }} />}
-      </View>
+    <View style={headerStyle} testID={testID}>
+      <ScreenHeaderBackButton
+        hideBackButton={hideBackButton}
+        onBackPress={onBackPress}
+        backIconName={backIconName}
+        backIconColor={backIconColor}
+        testID={testID}
+      />
+      
+      <ScreenHeaderTitle title={title} tokens={tokens} testID={testID} />
+      
+      <ScreenHeaderRightAction rightAction={rightAction} />
     </View>
   );
 };

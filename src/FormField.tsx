@@ -2,7 +2,6 @@
  * FormField Molecule - Complete Form Input with Label and Error
  *
  * Combines AtomicText (label/error) + AtomicInput (field)
- * Theme: {{THEME_NAME}} ({{CATEGORY}} category)
  *
  * Atomic Design Level: MOLECULE
  * Composition: AtomicText + AtomicInput
@@ -25,11 +24,66 @@ export interface FormFieldProps extends Omit<AtomicInputProps, 'state' | 'label'
   required?: boolean;
   containerStyle?: ViewStyle;
   style?: ViewStyle; // Alias for containerStyle (for convenience)
+  requiredIndicator?: string;
 }
 
 // =============================================================================
 // COMPONENT IMPLEMENTATION
 // =============================================================================
+
+const FormFieldLabel: React.FC<{
+  label?: string;
+  required?: boolean;
+  requiredIndicator?: string;
+  styles: ReturnType<typeof getStyles>;
+}> = ({ label, required, requiredIndicator, styles }) => {
+  if (!label) return null;
+
+  return (
+    <View style={styles.labelContainer}>
+      <AtomicText type="labelMedium" color="primary" style={styles.label}>
+        {label}
+      </AtomicText>
+      {required && (
+        <AtomicText type="labelMedium" color="error">
+          {requiredIndicator}
+        </AtomicText>
+      )}
+    </View>
+  );
+};
+
+const FormFieldMessage: React.FC<{
+  error?: string;
+  helperText?: string;
+  styles: ReturnType<typeof getStyles>;
+}> = ({ error, helperText, styles }) => {
+  if (error) {
+    return (
+      <AtomicText
+        type="bodySmall"
+        color="error"
+        style={styles.errorText}
+      >
+        {error}
+      </AtomicText>
+    );
+  }
+
+  if (helperText) {
+    return (
+      <AtomicText
+        type="bodySmall"
+        color="secondary"
+        style={styles.helperText}
+      >
+        {helperText}
+      </AtomicText>
+    );
+  }
+
+  return null;
+};
 
 export const FormField: React.FC<FormFieldProps> = ({
   label,
@@ -37,60 +91,34 @@ export const FormField: React.FC<FormFieldProps> = ({
   helperText,
   required = false,
   containerStyle,
-  style, // Accept both style and containerStyle
+  style,
+  requiredIndicator = ' *',
   ...inputProps
 }) => {
   const tokens = useAppDesignTokens();
   const inputState = error ? 'error' : 'default';
-
   const styles = getStyles(tokens);
 
   return (
     <View style={[styles.container, containerStyle || style]}>
-      {/* Label */}
-      {label && (
-        <View style={styles.labelContainer}>
-          <AtomicText type="labelMedium" color="primary" style={styles.label}>
-            {label}
-          </AtomicText>
-          {required && (
-            <AtomicText type="labelMedium" color="error">
-              {' *'}
-            </AtomicText>
-          )}
-        </View>
-      )}
+      <FormFieldLabel
+        label={label}
+        required={required}
+        requiredIndicator={requiredIndicator}
+        styles={styles}
+      />
 
-      {/* Input Field */}
       <AtomicInput
         {...inputProps}
         label={label || ''}
         state={inputState}
       />
 
-      {/* Error Message */}
-      {error && (
-        <AtomicText
-          type="bodySmall"
-         
-          color="error"
-          style={styles.errorText}
-        >
-          {error}
-        </AtomicText>
-      )}
-
-      {/* Helper Text */}
-      {!error && helperText && (
-        <AtomicText
-          type="bodySmall"
-         
-          color="secondary"
-          style={styles.helperText}
-        >
-          {helperText}
-        </AtomicText>
-      )}
+      <FormFieldMessage
+        error={error}
+        helperText={helperText}
+        styles={styles}
+      />
     </View>
   );
 };
