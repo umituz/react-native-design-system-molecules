@@ -14,6 +14,7 @@ import {
   getIconContainerStyle,
   getTitleContainerStyle,
   getMessageContainerStyle,
+  getButtonStyle,
 } from './confirmation-modal/styles/confirmationModalStyles';
 import {
   ConfirmationModalIcon,
@@ -27,13 +28,13 @@ const useConfirmButtonStyle = (
   tokens: ReturnType<typeof useAppDesignTokens>
 ) => {
   return React.useCallback(() => {
-    const baseStyle = require('./styles/confirmationModalStyles').getButtonStyle();
+    const baseStyle = getButtonStyle();
     const variantStyles = [];
-    
+
     if (variant === 'destructive') variantStyles.push({ backgroundColor: tokens.colors.error });
     if (variant === 'warning') variantStyles.push({ backgroundColor: tokens.colors.warning });
     if (variant === 'success') variantStyles.push({ backgroundColor: tokens.colors.success });
-    
+
     return [baseStyle, ...variantStyles];
   }, [variant, tokens.colors]);
 };
