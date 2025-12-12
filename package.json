@@ -1,14 +1,12 @@
 {
-  "name": "react-native-design-system-molecules",
-  "version": "1.4.1",
+  "name": "@umituz/react-native-design-system-molecules",
+  "version": "1.4.2",
   "description": "React Native Design System Molecules - General purpose package",
-  "main": "src/index.ts",
-  "types": "src/index.ts",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "scripts": {
-    "build": "echo 'Build skipped - TypeScript source files ready for publishing'",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint src --ext .ts,.tsx --max-warnings 0",
-    "prepublishOnly": "npm run lint"
+    "typecheck": "tsc --noEmit",
+    "lint": "tsc --noEmit"
   },
   "keywords": [
     "react-native",
@@ -17,35 +15,26 @@
     "general-purpose",
     "reusable"
   ],
-  "author": "",
+  "author": "Ümit UZ <umit@umituz.com>",
   "license": "MIT",
   "devDependencies": {
     "@types/react": "^18.2.0",
     "@types/react-native": "^0.72.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.57.1",
-    "eslint-plugin-react": "^7.33.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "react": "^18.2.0",
+    "react-native": "^0.74.0",
     "typescript": "^5.0.0"
   },
   "peerDependencies": {
     "react": ">=18.2.0",
     "react-native": ">=0.74.0",
-    "@umituz/react-native-design-system-atoms": "^1.0.0",
-    "@umituz/react-native-design-system-theme": "^1.0.0"
+    "@umituz/react-native-design-system-atoms": "*",
+    "@umituz/react-native-design-system-theme": "*"
   },
-  "peerDependenciesMeta": {
-    "@umituz/react-native-design-system-atoms": {
-      "optional": false
-    },
-    "@umituz/react-native-design-system-theme": {
-      "optional": false
-    }
+  "publishConfig": {
+    "access": "public"
   },
   "files": [
-    "src/",
-    "dist/",
+    "src",
     "README.md",
     "LICENSE"
   ]
